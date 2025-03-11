@@ -1,12 +1,14 @@
 :root {
     --primary-color: #4f46e5;
-    --primary-hover: #4338ca;
+    --primary-light: #818cf8;
+    --primary-dark: #4338ca;
     --secondary-color: #f3f4f6;
     --text-color: #1f2937;
     --light-text: #6b7280;
-    --error-color: #ef4444;
-    --success-color: #10b981;
     --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
     --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --transition: all 0.3s ease;
 }
@@ -23,34 +25,29 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .container {
     display: flex;
-    max-width: 1000px;
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--box-shadow);
+    min-height: 100vh;
 }
 
 .login-container {
     flex: 1;
     padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
 }
 
 .login-header {
-    text-align: center;
     margin-bottom: 30px;
 }
 
 .login-header h1 {
-    font-size: 1.8rem;
-    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: 600;
     margin-bottom: 10px;
 }
 
@@ -78,23 +75,15 @@ body {
 
 .input-group i {
     position: absolute;
+    left: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--light-text);
 }
 
-.input-group i.fas {
-    left: 15px;
-}
-
-.input-group i.toggle-password {
-    right: 15px;
-    cursor: pointer;
-}
-
 .input-group input {
     width: 100%;
-    padding: 12px 15px 12px 40px;
+    padding: 12px 15px 12px 45px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 1rem;
@@ -107,11 +96,20 @@ body {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--light-text);
+    cursor: pointer;
+}
+
 .error-message {
-    color: var(--error-color);
-    font-size: 0.85rem;
+    color: var(--danger-color);
+    font-size: 0.875rem;
     margin-top: 5px;
-    min-height: 20px;
+    min-height: 18px;
 }
 
 .form-options {
@@ -133,8 +131,7 @@ body {
 .forgot-password {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: var(--transition);
+    font-size: 0.875rem;
 }
 
 .forgot-password:hover {
@@ -155,36 +152,37 @@ body {
 }
 
 .login-button:hover {
-    background-color: var(--primary-hover);
+    background-color: var(--primary-dark);
+}
+
+.login-button:disabled {
+    background-color: var(--primary-light);
+    cursor: not-allowed;
 }
 
 .login-divider {
-    position: relative;
-    text-align: center;
+    display: flex;
+    align-items: center;
     margin: 20px 0;
 }
 
-.login-divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
+.login-divider::before,
+.login-divider::after {
+    content: "";
+    flex: 1;
     height: 1px;
     background-color: var(--border-color);
 }
 
 .login-divider span {
-    position: relative;
-    background-color: white;
-    padding: 0 10px;
+    padding: 0 15px;
     color: var(--light-text);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
 }
 
 .social-login {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .social-button {
@@ -200,12 +198,8 @@ body {
     transition: var(--transition);
 }
 
-.social-button:hover {
-    background-color: var(--secondary-color);
-}
-
 .social-button i {
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 .social-button.google i {
@@ -214,6 +208,10 @@ body {
 
 .social-button.facebook i {
     color: #1877f2;
+}
+
+.social-button:hover {
+    background-color: var(--secondary-color);
 }
 
 .register-link {
@@ -225,7 +223,6 @@ body {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
-    transition: var(--transition);
 }
 
 .register-link a:hover {
@@ -233,7 +230,7 @@ body {
 }
 
 .login-image {
-    flex: 1;
+    flex: 1.5;
     position: relative;
     display: none;
 }
@@ -260,14 +257,14 @@ body {
 .overlay-content {
     color: white;
     text-align: center;
+    max-width: 500px;
 }
 
 .overlay-content h2 {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     margin-bottom: 15px;
 }
 
-/* Responsive styles */
 @media (min-width: 768px) {
     .login-image {
         display: block;
@@ -277,10 +274,9 @@ body {
 @media (max-width: 767px) {
     .container {
         flex-direction: column;
-        max-width: 400px;
     }
     
     .login-container {
-        padding: 30px;
+        max-width: 100%;
     }
 }
