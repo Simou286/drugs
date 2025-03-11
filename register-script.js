@@ -106,9 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // If form is valid, submit it
         if (isValid) {
-            // Here you would typically send the data to your server
-            // For demonstration, we'll just show a success message
-            simulateRegistration();
+            registerUser();
         }
     });
     
@@ -162,8 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return strength;
     }
     
-    // Simulate registration process
-    function simulateRegistration() {
+    // Register user with API
+
+    function registerUser() {
         const registerButton = document.querySelector('.login-button');
         const originalText = registerButton.textContent;
         
@@ -171,12 +170,43 @@ document.addEventListener('DOMContentLoaded', function() {
         registerButton.disabled = true;
         registerButton.textContent = 'Creating account...';
         
-        // Simulate API call
-        setTimeout(function() {
+        // Prepare user data
+        const userData = {
+            firstName: firstNameInput.value.trim(),
+            lastName: lastNameInput.value.trim(),
+            email: emailInput.value.trim(),
+            password: passwordInput.value
+        };
+        
+        // Send registration request to server
+        fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.error || 'Registration failed');
+                });
+            }
+            return response.json();
+        })
+        .then(user => {
             // Success - show message and redirect
-            alert('Account created successfully! You can now login.');
-            window.location.href = 'login.html';
-        }, 1500);
+            alert('Account created successfully! Redirecting to dashboard...');
+            window.location.href = 'dashboard.html';
+        })
+        .catch(error => {
+            // Show error message
+            alert(error.message);
+            
+            // Reset button
+            registerButton.disabled = false;
+            registerButton.textContent = originalText;
+        });
     }
     
     // Social registration buttons
@@ -189,23 +219,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-    // Simulate registration process
-    function simulateRegistration() {
-        const registerButton = document.querySelector('.login-button');
-        const originalText = registerButton.textContent;
-        
-        // Show loading state
-        registerButton.disabled = true;
-        registerButton.textContent = 'Creating account...';
-        
-        // Simulate API call
-        setTimeout(function() {
-            // Success - show message and redirect
-            alert('Account created successfully! Redirecting to dashboard...');
-            
-            // In a real application, you might want to redirect to login page first
-            // But for demo purposes, we'll go straight to dashboard
-            window.location.href = 'dashboard.html';
-        }, 1500);
-    }
