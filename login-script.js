@@ -54,4 +54,62 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Email validation helper
-    function isValidEmail(email
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    
+    // Simulate login process
+    function simulateLogin() {
+        const loginButton = document.querySelector('.login-button');
+        const originalText = loginButton.textContent;
+        
+        // Show loading state
+        loginButton.disabled = true;
+        loginButton.textContent = 'Logging in...';
+        
+        // Simulate API call
+        setTimeout(function() {
+            // For demo purposes, we'll accept any credentials
+            // In a real application, this would validate against a server
+            
+            // Success - redirect to dashboard
+            alert('Login successful! Redirecting to dashboard...');
+            window.location.href = 'dashboard.html';
+            
+        }, 1500);
+    }
+    
+    // Social login buttons
+    const socialButtons = document.querySelectorAll('.social-button');
+    
+    socialButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const provider = this.classList.contains('google') ? 'Google' : 'Facebook';
+            alert(`${provider} login is not implemented in this demo. Redirecting to dashboard for demo purposes.`);
+            
+            // For demo purposes, redirect to dashboard
+            setTimeout(function() {
+                window.location.href = 'dashboard.html';
+            }, 1000);
+        });
+    });
+    
+    // Remember user's email if they've logged in before
+    const savedEmail = localStorage.getItem('userEmail');
+    const rememberMeCheckbox = document.getElementById('rememberMe');
+    
+    if (savedEmail) {
+        emailInput.value = savedEmail;
+        rememberMeCheckbox.checked = true;
+    }
+    
+    // Save email if remember me is checked
+    loginForm.addEventListener('submit', function() {
+        if (rememberMeCheckbox.checked) {
+            localStorage.setItem('userEmail', emailInput.value);
+        } else {
+            localStorage.removeItem('userEmail');
+        }
+    });
+});
