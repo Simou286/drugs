@@ -3,74 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - My Medications</title>
+    <title>Dashboard - Medication Tracker</title>
     <link rel="stylesheet" href="dashboard-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <div class="sidebar">
             <div class="sidebar-header">
-                <img src="logo.png" alt="MedTracker" class="logo">
+                <img src="logo.svg" alt="Logo" class="logo">
                 <h2>MedTracker</h2>
             </div>
+            
             <nav class="sidebar-nav">
-                <ul>
-                    <li class="active">
-                        <a href="dashboard.html"><i class="fas fa-pills"></i> My Medications</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-bell"></i> Reminders</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
-                    </li>
-                </ul>
+                <a href="#" class="active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#">
+                    <i class="fas fa-pills"></i>
+                    <span>Medications</span>
+                </a>
+                <a href="#">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Schedule</span>
+                </a>
+                <a href="#">
+                    <i class="fas fa-bell"></i>
+                    <span>Reminders</span>
+                </a>
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
             </nav>
-            <div class="sidebar-footer">
-                <a href="login.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            </div>
-        </aside>
-
+            
+            <button class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+        
         <!-- Main Content -->
-        <main class="main-content">
-            <header class="content-header">
-                <div class="header-left">
-                    <button class="menu-toggle" id="menuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <h1>My Medications</h1>
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <div class="top-nav">
+                <button id="menuToggle" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search medications...">
                 </div>
-                <div class="header-right">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search medications...">
-                        <button><i class="fas fa-search"></i></button>
+                
+                <div class="user-info">
+                    <div class="user-notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
                     </div>
                     <div class="user-profile">
-                        <img src="user-avatar.jpg" alt="User" class="avatar">
+                        <img src="https://via.placeholder.com/40" alt="User">
                         <span class="user-name">John Doe</span>
                     </div>
                 </div>
-            </header>
-
-            <div class="content-body">
+            </div>
+            
+            <!-- Content Header -->
+            <div class="content-header">
+                <h1>Medications Dashboard</h1>
+                <p>Manage your medications and track inventory</p>
+            </div>
+            
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Stats Cards -->
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Medications</h3>
+                            <p class="stat-number">12</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Expiring Soon</h3>
+                            <p class="stat-number">3</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon danger">
+                            <i class="fas fa-battery-quarter"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Low Stock</h3>
+                            <p class="stat-number">2</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Up to Date</h3>
+                            <p class="stat-number">7</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medications Table -->
                 <div class="card">
                     <div class="card-header">
-                        <h2>Medications at Home</h2>
-                        <button class="btn-primary" id="addMedicationBtn">
-                            <i class="fas fa-plus"></i> Add Medication
+                        <h2>Your Medications</h2>
+                        <button id="addMedicationBtn" class="btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Add Medication
                         </button>
                     </div>
+                    
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="medications-table">
@@ -78,119 +139,69 @@
                                     <tr>
                                         <th>Medication Name</th>
                                         <th>Dosage</th>
-                                        <th>Quantity Left</th>
+                                        <th>Quantity</th>
                                         <th>Expiration Date</th>
                                         <th>Category</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody id="medicationsTableBody">
-                                    <tr>
-                                        <td>Ibuprofen</td>
-                                        <td>400mg</td>
-                                        <td>24 tablets</td>
-                                        <td>2024-06-15</td>
-                                        <td><span class="badge badge-pain">Pain Relief</span></td>
-                                        <td>
-                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Amoxicillin</td>
-                                        <td>500mg</td>
-                                        <td>10 capsules</td>
-                                        <td>2023-12-30</td>
-                                        <td><span class="badge badge-antibiotic">Antibiotic</span></td>
-                                        <td>
-                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Loratadine</td>
-                                        <td>10mg</td>
-                                        <td>15 tablets</td>
-                                        <td>2024-08-22</td>
-                                        <td><span class="badge badge-allergy">Allergy</span></td>
-                                        <td>
-                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Paracetamol</td>
-                                        <td>500mg</td>
-                                        <td>32 tablets</td>
-                                        <td>2025-01-10</td>
-                                        <td><span class="badge badge-pain">Pain Relief</span></td>
-                                        <td>
-                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vitamin D3</td>
-                                        <td>2000 IU</td>
-                                        <td>45 tablets</td>
-                                        <td>2024-11-05</td>
-                                        <td><span class="badge badge-vitamin">Vitamin</span></td>
-                                        <td>
-                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
+                                    <!-- Table content will be loaded dynamically -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
-
+    
     <!-- Add Medication Modal -->
-    <div class="modal" id="addMedicationModal">
+    <div id="addMedicationModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Add New Medication</h3>
                 <button class="close-modal">&times;</button>
             </div>
+            
             <div class="modal-body">
                 <form id="addMedicationForm">
                     <div class="form-group">
                         <label for="medicationName">Medication Name</label>
                         <input type="text" id="medicationName" name="medicationName" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="dosage">Dosage</label>
                         <input type="text" id="dosage" name="dosage" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
                         <input type="text" id="quantity" name="quantity" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="expirationDate">Expiration Date</label>
-                        <input type="date" id="expirationDate" name="expirationDate" required>
+                        <input type="date" id="expirationDate" name="expirationDate">
                     </div>
+                    
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <select id="category" name="category" required>
-                            <option value="">Select a category</option>
+                        <select id="category" name="category">
                             <option value="Pain Relief">Pain Relief</option>
                             <option value="Antibiotic">Antibiotic</option>
                             <option value="Allergy">Allergy</option>
                             <option value="Vitamin">Vitamin</option>
-                            <option value="Cold & Flu">Cold & Flu</option>
-                            <option value="Prescription">Prescription</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="notes">Notes (Optional)</label>
+                        <label for="notes">Notes</label>
                         <textarea id="notes" name="notes" rows="3"></textarea>
                     </div>
+                    
                     <div class="form-actions">
                         <button type="button" class="btn-secondary cancel-modal">Cancel</button>
                         <button type="submit" class="btn-primary">Add Medication</button>
